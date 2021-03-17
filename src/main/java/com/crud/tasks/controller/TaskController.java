@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/task")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class TaskController {
 
     private final DbService service;
@@ -32,7 +33,7 @@ public class TaskController {
     }
 
     @DeleteMapping("deleteTask") // = @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
-    public void deleteTask(@RequestParam Long taskId) throws TaskNotFoundException{
+    public void deleteTask(@RequestParam Long taskId) throws TaskNotFoundException {
         service.deleteTask(taskId);
     }
 
@@ -43,7 +44,8 @@ public class TaskController {
         return taskMapper.mapToTaskDto(savedTask);
     }
 
-    @PostMapping(value = "createTask", consumes =  MediaType.APPLICATION_JSON_VALUE) // = @RequestMapping(method = RequestMethod.POST, value = "createTask")
+    @PostMapping(value = "createTask", consumes = MediaType.APPLICATION_JSON_VALUE)
+    // = @RequestMapping(method = RequestMethod.POST, value = "createTask")
     public void createTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         service.saveTask(task);
