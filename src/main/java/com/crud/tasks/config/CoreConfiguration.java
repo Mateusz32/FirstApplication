@@ -19,7 +19,6 @@ public class CoreConfiguration {
     }
 
     @Bean
-
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
