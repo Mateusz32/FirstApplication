@@ -21,7 +21,7 @@ dependencies {
     compile('io.springfox:springfox-swagger2:2.9.2')
     compile('io.springfox:springfox-swagger-ui:2.9.2')
 
-    runtimeOnly 'mysql:mysql-connector-java' //LOCALHOST
+    //runtimeOnly 'mysql:mysql-connector-java' //LOCALHOST
     runtimeOnly 'org.postgresql:postgresql' //HEROKU
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
