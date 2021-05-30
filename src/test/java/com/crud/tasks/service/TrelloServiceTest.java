@@ -1,10 +1,7 @@
 package com.crud.tasks.service;
 
 import com.crud.tasks.config.AdminConfig;
-import com.crud.tasks.domain.CreatedTrelloCardDto;
-import com.crud.tasks.domain.TrelloBoardDto;
-import com.crud.tasks.domain.TrelloCardDto;
-import com.crud.tasks.domain.TrelloListDto;
+import com.crud.tasks.domain.*;
 import com.crud.tasks.trello.client.TrelloClient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,6 +26,9 @@ public class TrelloServiceTest {
 
     @Mock
     AdminConfig adminConfig;
+
+    @Mock
+    SimpleEmailService emailService;
 
     @Test
     public void shouldFetchTrelloBoards() {
