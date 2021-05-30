@@ -20,20 +20,14 @@ public class TrelloMapperTest {
     @Autowired
     private TrelloMapper trelloMapper;
 
-    private TrelloList trelloList1, trelloList2;
-    private TrelloListDto trelloListDto1, trelloListDto2;
-    private List<TrelloList> treloList = new ArrayList<>();
-    private List<TrelloListDto> treloListDto = new ArrayList<>();
-    private TrelloBoard trelloBoard1, trelloBoard2;
-    private TrelloBoardDto trelloBoardDto1, trelloBoardDto2;
-    private List<TrelloBoard> treloBoard = new ArrayList<>();
-    private List<TrelloBoardDto> treloBoardDto = new ArrayList<>();
-    private TrelloCard trelloCard;
-    private TrelloCardDto trelloCardDto;
-
     @Test
     public void listBoardsDtoMapToBoardsTest() {
         //GIVEN
+        TrelloListDto trelloListDto1, trelloListDto2;
+        TrelloBoardDto trelloBoardDto1, trelloBoardDto2;
+        List<TrelloListDto> treloListDto = new ArrayList<>();
+        List<TrelloBoardDto> treloBoardDto = new ArrayList<>();
+
         trelloListDto1 = new TrelloListDto("1", "trelloListDto1", true);
         trelloListDto2 = new TrelloListDto("2", "trelloListDto2", true);
         treloListDto.add(trelloListDto1);
@@ -68,6 +62,11 @@ public class TrelloMapperTest {
     @Test
     public void listBoardsMapToBoardsDtoTest() {
         //GIVEN
+        TrelloList trelloList1, trelloList2;
+        TrelloBoard trelloBoard1, trelloBoard2;
+        List<TrelloList> treloList = new ArrayList<>();
+        List<TrelloBoard> treloBoard = new ArrayList<>();
+
         trelloList1 = new TrelloList("1", "trelloList1", true);
         trelloList2 = new TrelloList("2", "trelloList2", true);
         treloList.add(trelloList1);
@@ -102,6 +101,9 @@ public class TrelloMapperTest {
     @Test
     public void listTrelloListDtoMapToTrelloListTest() {
         //GIVEN
+        TrelloListDto trelloListDto1, trelloListDto2;
+        List<TrelloListDto> treloListDto = new ArrayList<>();
+
         trelloListDto1 = new TrelloListDto("1", "trelloListDto1", true);
         trelloListDto2 = new TrelloListDto("2", "trelloListDto2", true);
         treloListDto.add(trelloListDto1);
@@ -129,6 +131,9 @@ public class TrelloMapperTest {
     @Test
     public void listTrelloListMapToTrelloListDtoTest() {
         //GIVEN
+        TrelloList trelloList1, trelloList2;
+        List<TrelloList> treloList = new ArrayList<>();
+
         trelloList1 = new TrelloList("1", "trelloList1", true);
         trelloList2 = new TrelloList("2", "trelloList2", true);
         treloList.add(trelloList1);
@@ -157,6 +162,7 @@ public class TrelloMapperTest {
     @Test
     public void trelloCardDtoMapToTrelloCardTest() {
         //GIVEN
+        TrelloCardDto trelloCardDto;
         trelloCardDto = new TrelloCardDto("trelloCardDto", "descriptionDto", "posDto", "listIdDto");
 
         //WHEN
@@ -176,6 +182,7 @@ public class TrelloMapperTest {
     @Test
     public void trelloCardMapToTrelloCardDtoTest() {
         //GIVEN
+        TrelloCard trelloCard;
         trelloCard = new TrelloCard("trelloCard", "description", "pos", "listId");
 
         //WHEN

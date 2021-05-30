@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @AllArgsConstructor
-@NoArgsConstructor
 public class CreatedTrelloCardDto {
 
     @JsonProperty("id")
@@ -20,7 +19,4 @@ public class CreatedTrelloCardDto {
 
     @JsonProperty("shortUrl")
     private String shortUrl;
-
-//    @JsonProperty("badges")
-//    private TrelloBadgesDto TrelloBadgesDto;
 }
