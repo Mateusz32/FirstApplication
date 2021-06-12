@@ -25,8 +25,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     testImplementation 'com.google.code.gson:gson'
 
-    //runtimeOnly 'mysql:mysql-connector-java' //LOCALHOST
-    runtimeOnly 'org.postgresql:postgresql' //HEROKU
+    runtimeOnly 'mysql:mysql-connector-java' //LOCALHOST
+    //runtimeOnly 'org.postgresql:postgresql' //HEROKU
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

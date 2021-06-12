@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-
+import org.springframework.mail.javamail.MimeMessageHelper;
 import java.util.Optional;
 
 @Slf4j
@@ -26,15 +26,14 @@ public class SimpleEmailService {
     public void send(final Mail mail) {
         log.info("Starting email preparation...");
         try {
-            SimpleMailMessage mailMessage = createMailMessage(mail);
-            javaMailSender.send(mailMessage);
-            log.info("Email has been sent");
+            javaMailSender.send(createMimeMessage(mail));
+            log.info("Email has been sent.");
         } catch (MailException e) {
             log.error("Failed to process email sending: ", e.getMessage(), e);
         }
     }
 
-    private MimeMessagePreparator createMimeMessage(final Mail mail) {
+    public MimeMessagePreparator createMimeMessage(final Mail mail) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
@@ -47,8 +46,7 @@ public class SimpleEmailService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
-        mailMessage.setText(mail.getMessage());
-        Optional.ofNullable(mail.getToCc()).ifPresent(mailMessage::setCc);
+        mailMessage.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()));
         return mailMessage;
     }
 }
