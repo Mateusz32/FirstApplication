@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.mail.javamail.MimeMessageHelper;
+
 import java.util.Optional;
 
 @Slf4j
@@ -23,30 +24,40 @@ public class SimpleEmailService {
     @Autowired
     private MailCreatorService mailCreatorService;
 
-    public void send(final Mail mail) {
+    public void send(final Mail mail, TemplateEmail templateEmail) {
         log.info("Starting email preparation...");
         try {
-            javaMailSender.send(createMimeMessage(mail));
+            javaMailSender.send(createMimeMessage(mail, templateEmail));
             log.info("Email has been sent.");
         } catch (MailException e) {
             log.error("Failed to process email sending: ", e.getMessage(), e);
         }
     }
 
-    public MimeMessagePreparator createMimeMessage(final Mail mail) {
+    private MimeMessagePreparator createMimeMessage(final Mail mail,TemplateEmail templateEmail) {
         return mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setTo(mail.getMailTo());
             messageHelper.setSubject(mail.getSubject());
-            messageHelper.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()), true);
+            messageHelper.setText(getTemplateEmail(mail.getMessage(),templateEmail), true);
         };
     }
 
-    private SimpleMailMessage createMailMessage(final Mail mail) {
+    private SimpleMailMessage createMailMessage(final Mail mail, TemplateEmail templateEmail) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mailCreatorService.buildTrelloCardEmail(mail.getMessage()));
         return mailMessage;
+    }
+
+    private String getTemplateEmail(String message, TemplateEmail templateEmail) {
+        String text;
+        if (templateEmail == TemplateEmail.TRELLO_CARD_EMAIL) {
+            text = mailCreatorService.buildTrelloCardEmail(message);
+        } else {
+            text = mailCreatorService.buildSchedulerCardEmail(message);
+        }
+        return text;
     }
 }
